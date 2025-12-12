@@ -1,80 +1,77 @@
 export const teamData = {
-  "Student Coordinators": [
+  "LEAD TEAM": [
     {
       id: 1,
-      name: "Arjun Singh",
-      role: "Chief Coordinator",
+      name: "Justine Augustine",
+      role: "MENTOR",
       photo: "#",
     },
     {
       id: 2,
-      name: "Priya Sharma",
-      role: "Co-Coordinator",
+      name: "Ansheel Salodkar",
+      role: "COORDINATOR",
       photo: "#",
     },
     {
       id: 3,
-      name: "Raj Patel",
-      role: "Events Manager",
+      name: "Peter Salve",
+      role: "CO-COORDINATOR",
       photo: "#",
     },
     {
       id: 4,
-      name: "Neha Verma",
-      role: "Logistics Head",
+      name: "Simran Bobde",
+      role: "CO-COORDINATOR",
       photo: "#",
     },
   ],
-  "Promotion Team": [
+  "CULTURAL TEAM": [
     {
       id: 5,
-      name: "Karan Gupta",
-      role: "Marketing Lead",
+      name: "Sahil Korke",
+      role: "COORDINATOR",
       photo: "#",
     },
     {
       id: 6,
-      name: "Isha Desai",
-      role: "Social Media Manager",
+      name: "Siddhesh Dhore",
+      role: "CO-COORDINATOR",
       photo: "#",
     },
     {
       id: 7,
-      name: "Vikram Kumar",
-      role: "Content Creator",
+      name: "Bhoomi Khichhi",
+      role: "CO-COORDINATOR",
       photo: "#",
     },
     {
       id: 8,
-      name: "Aisha Khan",
-      role: "Graphics Designer",
+      name: "Valencio William",
+      role: "CO-COORDINATOR",
       photo: "#",
     },
   ],
-  "Outreach Team": [
+  "SPORTS TEAM": [
     {
       id: 9,
-      name: "Rohan Sharma",
-      role: "College Relations",
+      name: "Parth Lonkar",
+      role: "COORDINATOR",
       photo: "#",
     },
     {
       id: 10,
-      name: "Divya Nair",
-      role: "Community Outreach",
-      photo: "#",
-    },
-    {
-      id: 11,
-      name: "Aditya Mehra",
-      role: "Sponsorship Manager",
-      photo: "#",
-    },
-    {
-      id: 12,
-      name: "Sneha Patel",
-      role: "Partnerships Lead",
+      name: "Parth Rebhe",
+      role: "CO-COORDINATOR",
       photo: "#",
     },
   ],
+  "IT & WEBSITE": [
+    {
+      id: 9,
+      name: "Yash Lute",
+      role: "COORDINATOR",
+      photo: "#",
+    },
+  ],
+
 }

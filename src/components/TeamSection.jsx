@@ -1,4 +1,4 @@
-import { teamData } from "../data/team"
+import { teamData } from "../data/team";
 
 export default function TeamSection() {
   return (
@@ -8,42 +8,72 @@ export default function TeamSection() {
         <h2 className="text-4xl sm:text-5xl md:text-6xl medievalsharp text-center mb-12 medieval-glow font-bold">Our Team</h2>
 
         {/* Team Groups */}
-        {Object.entries(teamData).map((groupEntry) => (
-          <div key={groupEntry[0]} className="mb-16">
-            {/* Group Title */}
-            <h3 className="text-3xl font-bold text-white text-center mb-8 medievalsharp">{groupEntry[0]}</h3>
+        {Object.entries(teamData).map((groupEntry) => {
+          const groupName = groupEntry[0];
+          const members = groupEntry[1];
+          const isSmallGroup = members.length < 4;
 
-            {/* Team Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {groupEntry[1].map((member) => (
-                <div key={member.id} className="flex flex-col items-center">
+          return (
+            <div key={groupName} className="mb-16">
+              {/* Group Title */}
+              <h3 className="text-3xl font-bold text-white text-center mb-8 medievalsharp">{groupName}</h3>
 
-                  {/* 🔥 Animated Border Image Box */}
-                  <div className="team-image-wrapper max-w-[260px] w-full">
-                    <div className="team-image-inner">
-                      <img
-                        src={member.photo || "/placeholder.svg"}
-                        alt={member.name}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          e.target.src = `/placeholder.svg?height=300&width=300&query=Portrait+of+${member.name}`;
-                        }}
-                      />
+              {/* --- Conditional layout: grid for full rows, centered flex for small groups --- */}
+              {isSmallGroup ? (
+                /* Centered flex row on desktop, but keep fixed card width so sizes don't change */
+                <div className="flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap lg:justify-center gap-8">
+                  {members.map((member) => (
+                    <div key={member.id} className="flex flex-col items-center w-[260px]">
+                      <div className="team-image-wrapper w-full">
+                        <div className="team-image-inner">
+                          <img
+                            src={member.photo || "/placeholder.svg"}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              e.target.src = `/placeholder.svg?height=300&width=300&query=Portrait+of+${member.name}`;
+                            }}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="p-4 text-center text-white">
+                        <h4 className="text-2xl font-bold mb-1 medievalsharp text-white">{member.name}</h4>
+                        <p className="text-lg font-semibold medievalsharp medieval-glow text-white">{member.role}</p>
+                      </div>
                     </div>
-                  </div>
-                 
-
-                  {/* Member Info */}
-                  <div className="p-4 text-center text-white">
-                    <h4 className="text-2xl font-bold mb-1 medievalsharp text-white">{member.name}</h4>
-                    <p className="text-lg  font-semibold medievalsharp medieval-glow text-white">{member.role}</p>
-                  </div>
+                  ))}
                 </div>
-              ))}
+              ) : (
+                /* Original 4-column grid for 4+ members (keeps original behaviour) */
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                  {members.map((member) => (
+                    <div key={member.id} className="flex flex-col items-center">
+                      <div className="team-image-wrapper max-w-[260px] w-full">
+                        <div className="team-image-inner">
+                          <img
+                            src={member.photo || "/placeholder.svg"}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              e.target.src = `/placeholder.svg?height=300&width=300&query=Portrait+of+${member.name}`;
+                            }}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="p-4 text-center text-white">
+                        <h4 className="text-2xl font-bold mb-1 medievalsharp text-white">{member.name}</h4>
+                        <p className="text-lg font-semibold medievalsharp medieval-glow text-white">{member.role}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
-  )
+  );
 }
