@@ -1,0 +1,1111 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Updated color palette for carnival theme */
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.55 0.19 20);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.84 0.2 60);
+  --secondary-foreground: oklch(0.145 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.6 0.2 200);
+  --accent-foreground: oklch(0.145 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.7 0.2 20);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.9 0.2 60);
+  --secondary-foreground: oklch(0.145 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.7 0.2 200);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+@theme inline {
+  --font-sans: "Geist", "Geist Fallback";
+  --font-mono: "Geist Mono", "Geist Mono Fallback";
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/* Added carnival font and animation styles */
+@layer base {
+  @font-face {
+    font-family: "Fredoka One";
+    src: url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+  }
+
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .carnival-font {
+    @apply font-bold;
+    font-family: "Fredoka One", cursive;
+  }
+}
+
+/* carnival heading glow */
+.carnival-glow {
+  position: relative;
+  background: linear-gradient(90deg, #FFD57A 0%, #FFC75A 40%, #FFE9B0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* soft glow/shadow for legibility on video/image backgrounds */
+  text-shadow:
+    0 2px 8px rgba(255,180,60,0.18),
+    0 8px 30px rgba(255,150,40,0.12);
+}
+
+/* subtle reflected glow under heading */
+.carnival-glow::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, -10%);
+  width: 60%;
+  height: 8px;
+  border-radius: 9999px;
+  background: radial-gradient(closest-side, rgba(255,200,80,0.18), rgba(255,200,80,0.02));
+  filter: blur(8px);
+  pointer-events: none;
+  opacity: 0.95;
+}
+
+@keyframes pulse-float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+    opacity: 0.1;
+  }
+
+  50% {
+    transform: translateY(-10px);
+    opacity: 0.2;
+  }
+}
+
+@layer utilities {
+  .animate-pulse-float {
+    animation: pulse-float 4s ease-in-out infinite;
+  }
+
+  /* Added glow animation for countdown cards */
+  @keyframes pulse-glow {
+
+    0%,
+    100% {
+      opacity: 0.6;
+      filter: blur(12px);
+    }
+
+    50% {
+      opacity: 0.9;
+      filter: blur(16px);
+    }
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  /* Added glass morphism effect for navbar with carnival theme */
+  .navbar-glass {
+    @apply bg-gradient-to-r from-red-900/20 via-purple-900/20 to-red-900/20 backdrop-blur-md;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15), inset 0 1px 1px rgba(255, 215, 0, 0.1);
+  }
+
+  .navbar-glass-mobile {
+    @apply bg-gradient-to-r from-red-900/30 via-purple-900/30 to-red-900/30 backdrop-blur-md;
+  }
+
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
+  /* Fixed video */
+  .fixed-bg-wrap {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .fixed-bg-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform-origin: center;
+    filter: saturate(1.05) contrast(1.05);
+  }
+
+  /* golden carnival overlay to tint video and give warm glow */
+  .fixed-bg-gold-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255, 230, 160, 0.06), rgba(255, 200, 80, 0.06));
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+
+  /* Reusable Glass card for sections */
+  .glass-card {
+    background: linear-gradient(135deg, rgba(255, 245, 210, 0.08), rgba(255, 220, 120, 0.04));
+    border: 1px solid rgba(255, 234, 170, 0.08);
+    backdrop-filter: blur(10px) saturate(1.1);
+    -webkit-backdrop-filter: blur(10px) saturate(1.1);
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    padding: 1.25rem;
+  }
+
+  /* stronger variant for countdown-like glow */
+  .glass-card--highlight {
+    background: linear-gradient(135deg, rgba(255, 245, 210, 0.12), rgba(255, 215, 100, 0.06));
+    border: 1px solid rgba(255, 230, 140, 0.12);
+  }
+
+  /* ensure footer hides the video visually */
+  .site-footer {
+    position: relative;
+    z-index: 40;
+    /* higher than page content and video */
+    color: #fff;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  /* ensure footer text and links remain readable on top of the image */
+  .site-footer a,
+  .site-footer * {
+    color: rgba(255, 255, 255, 0.96);
+  }
+
+  /* small helper to increase contrast of footer text */
+  .site-footer * {
+    color: rgba(255, 255, 255, 0.96);
+  }
+
+  /* small helper to keep page content readable */
+  .page-section {
+    padding: 2rem;
+  }
+
+  /* optional utility to nudge sections up under title */
+  .section-tight {
+    margin-top: -1.25rem;
+  }
+
+  /* keep video from interfering with pointer events */
+  .fixed-bg-wrap,
+  .fixed-bg-gold-overlay,
+  .fixed-bg-video {
+    pointer-events: none;
+  }
+
+  /* thin shining separator line for footer */
+  .footer-separator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px; /* adjust thickness */
+    z-index: 50;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 215, 90, 0.0) 0%,
+      rgba(39, 178, 26, 0.65) 25%,
+      rgba(74, 212, 35, 0.95) 50%,
+      rgba(39, 178, 26, 0.65) 75%,
+      rgba(255, 215, 90, 0.0) 100%
+    );
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  /* animated sheen moving across the separator */
+  .footer-separator::after {
+    content: "";
+    position: absolute;
+    top: -30%;
+    left: -30%;
+    width: 60%;
+    height: 160%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.0), rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.0));
+    transform: translateX(-100%);
+    animation: footer-shimmer 2.8s linear infinite;
+    filter: blur(6px);
+    pointer-events: none;
+  }
+
+  @keyframes footer-shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+  }
+
+  /* ensure footer content remains readable above separator */
+  .site-footer .relative { z-index: 60; }
+}
+
+/* optional fallback or global styles - do not override the --font-cinzel variable */
+:root {
+  /* nothing to change here; next/font injected class applies the variable */
+}
+
+/* Example usage helper (not required) */
+.font-cinzel {
+  font-family: var(--font-cinzel), serif;
+}
+
+.medievalsharp {
+  font-family: var(--font-medievalsharp), serif;
+}
+
+/* globals.css or tailwind base file */
+:root {
+  --accent: #f6c94d; /* example accent */
+}
+.bg-accent { background-color: var(--accent); }
+.text-accent { color: var(--accent); }
+
+/* If you used font variables earlier */
+.font-cinzelDecorative { font-family: var(--font-cinzelDecorative); }
+.font-medievalSharp { font-family: var(--font-medievalSharp); }
+
+/* optional small helper for timeline boxes */
+.timeline-box { /* use tailwind in component; keep for semantics */ }
+
+/* glow for medievalsharp headings — tight glow only around text */
+.medieval-glow {
+  color: #ffffff !important;
+  position: relative;
+  z-index: 1;
+  font-weight: 700;
+  display: inline-block; /* IMPORTANT: shrink-wrap to text */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  text-shadow:
+    0 1px 4px rgba(255,215,110,0.4),
+    0 4px 18px rgba(255,180,60,0.28),
+    0 0 28px rgba(255,200,80,0.24),
+    0 0 40px rgba(255,150,50,0.16);
+}
+
+/* soft golden halo that stays close to the text only */
+.medieval-glow::before {
+  content: "";
+  position: absolute;
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+
+  /* small padding to gently expand glow */
+  padding: 6px;
+
+  border-radius: 8px;
+  background: radial-gradient(
+      closest-side,
+      rgba(255,200,80,0.28),
+      rgba(255,200,80,0.03)
+  );
+
+  filter: blur(12px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* text above glow */
+.medieval-glow > * {
+  position: relative;
+  z-index: 2;
+}
+
+
+.countdown-blue {
+  color: #ffffff !important;
+  position: relative;
+  z-index: 2;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+
+  text-shadow:
+    0 0 6px rgba(120,180,255,0.95),
+    0 0 12px rgba(90,150,255,0.75),
+    0 0 22px rgba(70,130,255,0.55),
+    0 0 36px rgba(60,120,255,0.40),
+    0 0 50px rgba(50,110,255,0.30);
+}
+
+.countdown-blue::before {
+  content: "";
+  position: absolute;
+  inset: -25%;
+  border-radius: 14px;
+  z-index: 0;
+  background: radial-gradient(
+    circle,
+    rgba(120,180,255,0.30) 0%,
+    rgba(90,150,255,0.18) 40%,
+    rgba(70,130,255,0.06) 70%,
+    rgba(50,110,255,0.00) 100%
+  );
+  filter: blur(22px);
+  pointer-events: none;
+}
+/* glowing blue effect for countdown labels (days, hours, minutes, seconds) */
+/* strong, visible glow for countdown labels (Days / Hours / ...) */
+/* Put this after your .countdown-blue rules so it doesn't get overridden. */
+.countdown-label-blue {
+  display: inline-block;       /* avoids weird inline stacking issues */
+  position: relative;          /* establishes stacking context for ::before */
+  z-index: 2;                  /* bring label above its pseudo-element */
+  color: #dfe8ff !important;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-shadow:
+    0 0 5px rgba(120,180,255,0.85),
+    0 0 10px rgba(90,150,255,0.60),
+    0 0 16px rgba(70,130,255,0.30);
+}
+
+/* the glowing aura behind the label text */
+.countdown-label-blue::before {
+  content: "";
+  position: absolute;
+  inset: -35%;                 /* larger spread so glow is visible */
+  border-radius: 10px;
+  z-index: 1;                  /* behind the label text but above background */
+  pointer-events: none;
+  background: radial-gradient(
+    circle,
+    rgba(120,180,255,0.40) 0%,
+    rgba(90,150,255,0.20) 35%,
+    rgba(70,130,255,0.08) 65%,
+    rgba(60,120,255,0.00) 100%
+  );
+  filter: blur(18px);          /* stronger blur */
+  mix-blend-mode: screen;      /* helps glow pop on dark backgrounds */
+  opacity: 1;
+}
+/* Fallback & reduced-transparency support */
+@media (prefers-reduced-transparency: reduce) {
+  .backdrop-blur-md {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(0,0,0,0.65) !important; /* stronger opaque fallback */
+  }
+}
+
+/* For browsers without backdrop-filter support, increase opacity a little */
+@supports not ((-webkit-backdrop-filter: blur(8px)) or (backdrop-filter: blur(8px))) {
+  .backdrop-blur-md {
+    background: rgba(0,0,0,0.66); /* fallback - slightly darker so text remains readable */
+  }
+}
+/* ---- ANIMATED BORDER AROUND IMAGE ---- */
+.team-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.team-image-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #0b0b0b,
+    #2bd522,
+    #0b0b0b,
+    transparent
+  );
+  animation: spinBorder 4s linear infinite;
+  z-index: 0;
+}
+
+@keyframes spinBorder {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.team-image-inner {
+  position: absolute;
+  inset: 3px; /* thickness of border */
+  background: #111;
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 2;
+}
+
+
+/* ---------- connectors & dot blink ---------- */
+.timeline-connector {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 1px;
+  background-color: rgba(148,163,184,1); /* neutral */
+  z-index: 10;
+  display: none; /* hidden by default; show on md via utility classes below */
+}
+
+/* show connectors on desktop via tailwind breakpoint helper class used in JSX */
+@media (min-width: 768px) {
+  .timeline-connector { display: block; }
+}
+
+/* central dot blink - green pulse/glow */
+@keyframes blinkGreen {
+  0% {
+    background-color: #10b935;
+    box-shadow: 0 0 0 0 rgba(16,185,129,0.0);
+  }
+  50% {
+    background-color: #41d334;
+    box-shadow: 0 0 18px 8px rgba(16,185,129,0.12);
+  }
+  100% {
+    background-color: #29b910;
+    box-shadow: 0 0 0 0 rgba(16,185,129,0.0);
+  }
+}
+.timeline-dot-blink {
+  animation: blinkGreen 1.6s ease-in-out infinite;
+  transition: box-shadow 200ms, background-color 100ms;
+  z-index: 30;
+}
+
+/* ensure connector sits beneath the small dot border if necessary */
+.timeline-connector-behind {
+  z-index: 8;
+}
+
+/* Modal sizing tweaks (larger modal) */
+.event-modal-dialog {
+  /* the element already uses md:max-w-5xl in JSX; this is just fallback tuning */
+}
+
+/* small responsive tweak to ensure connectors don't overlap card on small md widths */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .timeline-connector[data-length="long"] { width: 12rem; }
+  .timeline-connector[data-length="med"]  { width: 8.5rem; }
+}
+
+/* ---------- Responsive animated band + video table styles (mobile-first) ---------- */
+
+/* base (mobile) */
+.cultural-table-wrap {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 2px;        /* mobile inner gap (smaller) */
+  box-sizing: border-box;
+  background: transparent;
+}
+
+.cultural-table-wrap::before {
+  content: "";
+  position: absolute;
+
+  /* MOBILE STRIP SIZE */
+  inset: -10%;  
+
+  /* MOBILE COLORS */
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #2bd522,
+    #2bd522,
+    #2bd522,
+    transparent
+  );
+
+  /* MOBILE SPEED */
+  animation: spinBorder 9s linear infinite;
+
+  z-index: 10;
+  border-radius: 16px;
+  pointer-events: none;
+}
+
+
+/* Make the container use the background-image and keep a proper aspect ratio */
+.cultural-video-inner {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;    /* same as tailwind bg-cover */
+  background-position: center; /* same as tailwind bg-center */
+  z-index: 20;
+  /* Use CSS aspect-ratio where supported; provides exact height to match image ratio */
+   min-height: 320px;     /* base */
+  height: 100%;          /* allow growing with content */
+  display: block;
+}
+/* Mobile: show the left ~40-50% of the background image */
+@media (max-width: 767px) {
+  .cultural-video-inner {
+    /* shift focal point to the left.
+       0% = left edge, 50% = center, 100% = right edge.
+       25%–30% typically shows the left ~40-50% area nicely. */
+    background-position: 1% center; /* try 20% / 30% to fine-tune */
+    background-size: cover;          /* keep cover so it fills area */
+    /* optional: increase min-height a bit on small screens if table needs space */
+    min-height: 420px;
+  }
+}
+
+/* Make img inside .cultural-video-inner behave exactly like the video background */
+.cultural-video-inner img {
+  position: absolute;
+  inset: 0;                /* top:0; right:0; bottom:0; left:0; */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 21;             /* keep it behind overlay (25) and content (30) */
+  pointer-events: none;    /* so clicks pass through to content if needed */
+}
+
+/* video behaves like background */
+.cultural-video-inner video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 21;
+}
+
+
+/* Overlay and content rules (keeps table readable on top) */
+.cultural-video-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: 25;
+  background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.1));
+  pointer-events: none;
+}
+.cultural-table-content {
+  position: relative;
+  z-index: 30;
+  padding: 1rem; /* adapt as needed */
+}
+
+/* rotation keyframes */
+@keyframes spinBorder {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ---------- Desktop / Tablet and up (override values) ---------- */
+@media (min-width: 768px) {
+  .cultural-table-wrap {
+    border-radius: 14px;
+    padding: 2px;        /* desktop inner gap (4px as requested) */
+  }
+
+  .cultural-table-wrap::before {
+    inset: -50%;         /* desktop: larger ring travel path for wider aspect */
+    animation-duration: 4s; /* slower on desktop for a more relaxed effect */
+    border-radius: 18px;
+  }
+
+  .cultural-video-inner {
+    border-radius: 12px;
+    min-height: 320px;   /* desktop height */
+  }
+
+  .cultural-video-inner video { z-index: 21; }
+
+  .cultural-video-overlay {
+    border-radius: 12px;
+  }
+
+  .cultural-table-content {
+    padding: 1rem;       /* desktop padding */
+  }
+}
+
+/* optional: prefer-reduced-motion respect */
+@media (prefers-reduced-motion: reduce) {
+  .cultural-table-wrap::before { animation: none; }
+}
+@media (min-width: 768px) {
+  .cultural-table-wrap::before {
+
+    /* wider path so both bands are clearly visible */
+    inset: -80%;
+
+    /* TWO GREEN BANDS separated by deep black */
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      #2bd522 8%,     /* Band 1 start */
+      #2bd522 16%,    /* Band 1 end */
+      #000000 28%,    /* Black gap start */
+      #000000 40%,    /* Black gap end */
+      #2bd522 48%,    /* Band 2 start */
+      #2bd522 56%,    /* Band 2 end */
+      #000000 62%,    /* Black gap start */
+      #000000 100%,    /* Black gap end */
+      transparent 0%
+    );
+
+    /* smooth elegant rotation */
+    animation-duration: 7s;
+
+    border-radius: 20px;
+  }
+}
+
+/* small horizontal connector visible on mobile between left rail and card */
+.mobile-connector {
+  width: 28px;           /* length of connector */
+  height: 2px;
+  background-color: rgba(148,163,184,0.9); /* neutral-400-ish */
+  border-radius: 2px;
+  z-index: 15;
+}
+
+/* align the dot visually on mobile */
+@media (max-width: 767px) {
+  .timeline-dot-blink {
+    width: 12px;
+    height: 12px;
+  }
+
+  /* spacing tweak: make sure the left rail area doesn't shrink */
+  .events-left-rail {
+    min-width: 98px;
+  }
+}
+
+/* MOBILE: Full-height vertical timeline rail */
+.mobile-timeline-rail {
+  position: relative;
+}
+
+.mobile-timeline-rail::before {
+  content: "";
+  position: absolute;
+  left: 46px; /* align with your dot */
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(0, 0, 8, 0.22); /* subtle grey line */
+  border-radius: 2px;
+  z-index: 5;
+}
+
+.left-rail-dot {
+  position: relative;
+  z-index: 10; /* make sure dot is above the rail */
+}
+
+.left-rail-cell {
+  min-width: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* ---------- EVENTS IMAGE BORDER BANDS (simple; follows team & cultural styles) ---------- */
+/* wrapper that keeps a 2px visible ring for the animated bands */
+.events-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  padding: 2px;          /* EXACT 2px gap from image to band */
+  box-sizing: border-box;
+  overflow: hidden;      /* clip bands outside the wrapper */
+  background: transparent;
+}
+
+/* the rotating band lives behind the image via ::before */
+.events-image-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: -40%;           /* travel area; tuned for mobile default */
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #0b0b0b,
+    #2bd522,
+    #0b0b0b,
+    transparent
+  );
+  animation: spinBorder 6s linear infinite; /* uses your existing spinBorder keyframes */
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* inner area that contains the image (sits above bands) */
+.events-image-inner {
+  position: absolute;
+  inset: 2px;            /* exactly the padding amount -> ensures band visible only in 2px ring */
+  background: #111;      /* fallback bg behind image */
+  border-radius: calc(10px - 2px);
+  overflow: hidden;
+  z-index: 2;            /* above the rotating bands */
+}
+
+/* image itself fills the inner box */
+.events-image-inner img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Desktop overrides: make band path larger and slower (same pattern as cultural-table) */
+@media (min-width: 768px) {
+  .events-image-wrapper::before {
+    inset: -60%;
+    animation-duration: 7s;
+    /* two green bands separated by black gap — tuned for desktop travel path */
+    background: linear-gradient(
+      90deg,
+      transparent,
+      #000000,
+      #2bd522,
+      #000000 ,
+      transparent 
+    );
+    border-radius: inherit;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .events-image-wrapper::before { animation: none; }
+}
+
+
+/* ===== Replace previous glassy-badge animation with this visible green version ===== */
+.glassy-badge {
+  position: relative;
+  overflow: hidden;
+  /* keep the existing glass look */
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+/* subtle outer ring (keeps existing look) */
+.glassy-badge::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, rgba(90,255,160,0.06), rgba(90,255,160,0.00));
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* animated inner glow layer — visible, above ::after but below text */
+.glassy-badge::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 1; /* above ::after (z=0) but below content (z=3) */
+
+  /* strong visible base so animation is perceptible on any background */
+  background: radial-gradient(circle at 50% 40%,
+    rgba(90,255,160,0.20) 0%,
+    rgba(20,180,95,0.10) 40%,
+    rgba(10,110,55,0.02) 70%,
+    transparent 100%);
+
+  /* rotating inset shadow like your loader */
+  animation: dept-rotate-visible 2s linear infinite;
+  transform-origin: center center;
+}
+
+/* make initials/text sit above everything */
+.glassy-badge > * {
+  position: relative;
+  z-index: 3;
+  mix-blend-mode: normal; /* keep text crisp */
+}
+
+/* visible rotating shadow keyframes */
+@keyframes dept-rotate-visible {
+  0% {
+    transform: rotate(0deg);
+    box-shadow:
+      0 6px 14px 0 rgba(184,255,191,0.20) inset,
+      0 14px 26px 0 rgba(50,255,75,0.18) inset,
+      0 36px 40px 0 rgba(12,143,35,0.12) inset;
+    opacity: 1;
+  }
+  50% {
+    transform: rotate(180deg);
+    box-shadow:
+      0 6px 8px 0 rgba(184,255,191,0.14) inset,
+      0 12px 18px 0 rgba(15,166,59,0.14) inset,
+      0 30px 40px 0 rgba(8,78,22,0.10) inset;
+    opacity: 0.95;
+  }
+  100% {
+    transform: rotate(360deg);
+    box-shadow:
+      0 6px 14px 0 rgba(184,255,191,0.20) inset,
+      0 14px 26px 0 rgba(50,255,75,0.18) inset,
+      0 36px 40px 0 rgba(12,143,35,0.12) inset;
+    opacity: 1;
+  }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .glassy-badge::before { animation: none; }
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ---------- Image sharpness fix (paste into globals.css) ---------- */
+/* Ensure the rotating band stays on its own composite layer */
+.events-image-wrapper::before {
+  /* only transform is animated — hint to composite the pseudo-element */
+  will-change: transform;
+  /* keep animation using transform (rotate) only — avoids filters here */
+}
+
+/* Make the wrapper a new stacking context but *not* rasterized as bitmap */
+.events-image-wrapper {
+  isolation: isolate; /* create local stacking context */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Stronger isolation: let the inner image be painted independently */
+.events-image-inner {
+  /* create an isolated paint layer so parent effects (backdrop-filter, opacity)
+     will not force this element to be rasterized at low-res */
+  contain: paint;           /* creates a paint containment for the image box */
+  -webkit-transform: none;  /* avoid accidental transforms on parent */
+  transform: none !important;
+  will-change: auto !important; /* avoid forcing composite on parent */
+  backface-visibility: hidden;
+}
+
+/* Put the img on its own layer, but avoid over-forcing GPU compositing */
+.events-image-inner img {
+  /* remove aggressive transform/translateZ from previously suggested fixes
+     — contain:paint + isolation is already handling the isolation. */
+  transform: none !important;
+  -webkit-transform: none !important;
+  will-change: auto !important;
+
+  /* default sampling, ensure browser uses high-quality resampling */
+  image-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* keep object-fit cover so layout remains unchanged */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* If you still have a blur/backdrop on the content wrapper, keep it on ::before only
+   so children are not part of that rasterized layer (example for your wrappers) */
+.cultural-table-wrap::before,
+.outer-glass::before,
+.cultural-video-inner::before {
+  will-change: transform; /* animate/rotate only on the pseudo-element */
+  /* keep backdrop-filter only here if needed; children remain separate */
+}
+
+/* timeline image: show top ~50-60% on desktop, center on small screens */
+.timeline-crop {
+  /* shift focal point up (tweak the Y value to taste; 15% - 25% works well) */
+  object-position: 50% 25%;
+  /* keep object-fit cover so image fills container */
+  object-fit: cover;
+}
+
+/* keep mobile view centered (so mobile appearance remains same) */
+@media (max-width: 767px) {
+  .timeline-crop {
+    object-position: 50% 30%;
+  }
+}
+/* specifically target images inside the events image inner wrapper */
+.events-image-inner img.timeline-crop {
+  object-position: 50% 25%;
+  object-fit: cover; /* keep cover behavior */
+}
+
+/* mobile override */
+@media (max-width: 767px) {
+  .events-image-inner img.timeline-crop {
+    object-position: 50% 30%;
+  }
+}
+/* Modal blurred background filler (behind the image) */
+.modal-bg-blur {
+  background-repeat: no-repeat;
+  background-size: cover;          /* fill area */
+  background-position: center;
+  filter: blur(14px) saturate(0.8) brightness(0.45);
+  transform: scale(1.06);          /* slightly scale so edges don't show */
+  will-change: transform, filter;
+  pointer-events: none;
+}
+
+/* Foreground image: full image visible, but contained and well centered */
+.modal-img-foreground {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;            /* show full image */
+  display: block;
+  /* small drop shadow to lift it above blurred background */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  border-radius: 6px;
+}
+
+/* Slight layout tweak on small screens so img doesn't sit flush to edges */
+@media (max-width: 767px) {
+  .modal-img-foreground {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .modal-bg-blur {
+    filter: blur(12px) saturate(0.8) brightness(0.44);
+    transform: scale(1.08);
+  }
+}
+
+/* Respect prefers-reduced-motion: remove transform animation hints */
+@media (prefers-reduced-motion: reduce) {
+  .modal-bg-blur { transform: none; transition: none; }
+}
+

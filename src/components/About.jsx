@@ -1,0 +1,98 @@
+import { aboutData } from "../data/about";
+import Aftermovie from "./Aftermovie";
+
+export default function About() {
+  const people = aboutData.keyPeople || [];
+
+  return (
+    <section className="py-16 sm:py-20 px-4 bg-transparent min-h-screen">
+      <div className="max-w-7xl mx-auto space-y-10">
+        {/* -------------------------
+            Glass Box 1: About + Aftermovie
+           ------------------------- */}
+       <div className="relative rounded-2xl shadow-xl overflow-hidden">
+        <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 rounded-2xl
+                       ring-1 ring-teal-400/30  /* Adjusted ring color for green/magical look */
+                       shadow-[0_0_20px_rgba(0,128,128,0.5)] /* Adjusted shadow for green glow */
+                       z-0" /* Set z-index lower than the content */
+          />
+           <div className="bg-white/10 backdrop-blur-md rounded-2xl border-2 border-green-600 p-6 sm:p-8 md:p-10 relative text-center z-10">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl medievalsharp text-center mb-6 medieval-glow font-bold">
+              About INSIGHT
+            </h2>
+
+            <p className="text-xl text-white text-center mb-8 max-w-3xl mx-auto">
+              {aboutData.description}
+            </p>
+
+
+            {/* Aftermovie INSIDE this glass box */}
+            <div className="mx-auto max-w-4xl">
+              <Aftermovie />
+            </div>
+          </div>
+        </div>
+        
+
+        {/* -------------------------
+            Glass Box 2: People Grid (separate box)
+           ------------------------- */}
+        <div className="relative bg-white/8 backdrop-blur-sm rounded-2xl p-6 sm:p-8 md:p-10 shadow-xl overflow-hidden border-2 border-green-600">
+          {/* subtle border/glow for the people box (lighter) */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 rounded-2xl
+                       ring-1 ring-teal-400/30  /* Adjusted ring color for green/magical look */
+                       shadow-[0_0_20px_rgba(0,128,128,0.5)] /* Adjusted shadow for green glow */
+                       z-0" /* Set z-index lower than the content */
+          />
+
+
+          <div className="relative z-20 ">
+            <h3 className="text-2xl sm:text-3xl font-semibold text-white mb-6 medievalsharp text-center">
+              Key People
+            </h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+  {people.map((person, idx) => (
+    <div key={idx} className="flex flex-col items-center">
+
+      {/* IMAGE ONLY */}
+      <div className="aspect-square w-full max-w-[280px] team-image-wrapper  rounded-lg overflow-hidden">
+        <div className="team-image-inner">
+        <img
+          src={person.photo || "/placeholder.svg"}
+          alt={person.name}
+          className="w-full h-full object-cover"
+          onError={(e) => {
+            e.target.src = `/placeholder.svg?height=300&width=300&query=Portrait+of+${person.name}`;
+          }}
+        />
+        </div>
+      </div>
+
+      {/* TEXT BOX (NOT CONNECTED TO IMAGE) */}
+      <div className="text-center mt-4">
+        <h4 className="text-lg font-bold text-white mb-1">
+          {person.name}
+        </h4>
+        <p className="text-accent font-semibold">
+          {person.designation}
+        </p>
+      </div>
+
+    </div>
+  ))}
+</div>
+
+
+          </div>
+        </div>
+
+        {/* additional glass boxes can be appended here later */}
+      </div>
+    </section>
+  );
+}
