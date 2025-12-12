@@ -62,15 +62,15 @@ function formatDatePretty(dateStr) {
 export default function Events() {
   const [open, setOpen] = useState(null); // event id or null
   useEffect(() => {
-  console.log("Events imported:", events);
-  const ids = events.map(e => e.id);
-  const dupIds = ids.filter((id, i) => ids.indexOf(id) !== i);
-  if (dupIds.length) console.warn("Duplicate ids in runtime events:", [...new Set(dupIds)]);
-  const titles = events.map(e => (e.title || e.name || "").toString().trim().toLowerCase());
-  const dupTitles = titles.filter((t, i) => titles.indexOf(t) !== i);
-  if (dupTitles.length) console.warn("Duplicate titles in runtime events:", [...new Set(dupTitles)]);
-  console.log("events.length =", events.length);
-}, []);
+    console.log("Events imported:", events);
+    const ids = events.map(e => e.id);
+    const dupIds = ids.filter((id, i) => ids.indexOf(id) !== i);
+    if (dupIds.length) console.warn("Duplicate ids in runtime events:", [...new Set(dupIds)]);
+    const titles = events.map(e => (e.title || e.name || "").toString().trim().toLowerCase());
+    const dupTitles = titles.filter((t, i) => titles.indexOf(t) !== i);
+    if (dupTitles.length) console.warn("Duplicate titles in runtime events:", [...new Set(dupTitles)]);
+    console.log("events.length =", events.length);
+  }, []);
 
 
   useEffect(() => {
@@ -236,27 +236,31 @@ export default function Events() {
   );
 }
 
-function EventCard({ ev, onOpen }) {
+function EventCard({ ev, onOpen, isLcpCandidate = false }) {
+  // decide sizes value according to your card CSS.
+  // If the card max width is 288px on desktop and smaller on mobile:
+  const sizes = "(max-width: 640px) 280px, 288px";
+
+  const base = ev.posterBase || ev.poster; // fallback to old prop
+  const src400 = `${base}-400.webp`;
+  const src800 = `${base}-800.webp`;
+  const src1200 = `${base}-1200.webp`;
+  const defaultSrc = src800; // fallback for browsers not using srcset
+
   return (
     <div className="flex justify-center relative">
-      <button
-  onClick={onOpen}
-  className="
-    w-full md:w-72
-    h-48 md:h-56 lg:h-60 /* ← FIXED HEIGHT → allows cropping */
-    shrink-0 overflow-hidden rounded-lg shadow-sm
-    focus:outline-none focus:ring-2 focus:ring-accent relative
-  "
-  aria-label={`Open details for ${ev.name}`}
->
-
+      <button onClick={onOpen} className="w-full md:w-72 h-48 md:h-56 lg:h-60 shrink-0 overflow-hidden rounded-lg shadow-sm relative">
         <div className="events-image-wrapper" style={{ borderRadius: "10px" }}>
           <div className="events-image-inner">
             <img
-              src={ev.poster}
+              src={defaultSrc}
+              srcSet={`${src400} 400w, ${src800} 800w, ${src1200} 1200w`}
+              sizes={sizes}
               alt={ev.name}
+              loading={isLcpCandidate ? "eager" : "lazy"} // make LCP candidate eager
+              fetchPriority={isLcpCandidate ? "high" : "auto"} // browsers supporting it
               draggable={false}
-              className="w-full h-full timeline-crop"
+              className="w-full h-full timeline-crop object-cover"
             />
           </div>
         </div>
@@ -264,3 +268,4 @@ function EventCard({ ev, onOpen }) {
     </div>
   );
 }
+
