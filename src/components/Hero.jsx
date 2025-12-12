@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function Hero() {
   const [countdown, setCountdown] = useState({
@@ -43,10 +44,14 @@ export default function Hero() {
   return (
     <section id="home" className="relative min-h-screen w-full flex flex-col items-center justify-center px-4 overflow-hidden">
       <div className="relative z-10 flex flex-col items-center mb-6">
-        <img
+        <Image
           src="/Insight-name.webp"
           alt="INSIGHT Event Logo"
-          className="w-76 sm:w-80 md:w-120 h-auto mb-2 mx-auto drop-shadow-[0_6px_20px_rgba(0,0,0,0.6)]"
+          width={520}            // logical width used in layout
+          height={180}           // logical height
+          priority               // marks as LCP / preloads variants
+          sizes="(max-width: 768px) 320px, 520px"
+          style={{ display: "block", margin: "0 auto", width: "auto", height: "auto" }}
         />
         <p className="mt-1 sm:mt-2 px-4 text-sm sm:text-lg md:text-xl font-cinzel font-semibold text-[#F8D48A] drop-shadow-[0_2px_10px_rgba(0,0,0,0.65)] text-center max-w-2xl">
           St. Vincent Pallotti College of Engineering and Technology, Nagpur

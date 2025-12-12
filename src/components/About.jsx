@@ -10,15 +10,15 @@ export default function About() {
         {/* -------------------------
             Glass Box 1: About + Aftermovie
            ------------------------- */}
-       <div className="relative rounded-2xl shadow-xl overflow-hidden">
-        <div
+        <div className="relative rounded-2xl shadow-xl overflow-hidden">
+          <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 rounded-2xl
                        ring-1 ring-teal-400/30  /* Adjusted ring color for green/magical look */
                        shadow-[0_0_20px_rgba(0,128,128,0.5)] /* Adjusted shadow for green glow */
                        z-0" /* Set z-index lower than the content */
           />
-           <div className="bg-white/10 backdrop-blur-md rounded-2xl border-2 border-green-600 p-6 sm:p-8 md:p-10 relative text-center z-10">
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl border-2 border-green-600 p-6 sm:p-8 md:p-10 relative text-center z-10">
             <h2 className="text-4xl sm:text-5xl md:text-6xl medievalsharp text-center mb-6 medieval-glow font-bold">
               About INSIGHT
             </h2>
@@ -34,7 +34,7 @@ export default function About() {
             </div>
           </div>
         </div>
-        
+
 
         {/* -------------------------
             Glass Box 2: People Grid (separate box)
@@ -55,37 +55,40 @@ export default function About() {
               Key People
             </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-  {people.map((person, idx) => (
-    <div key={idx} className="flex flex-col items-center">
+            {/* responsive grid — picks correct columns for the number of people */}
+            { /* replace the existing grid wrapper with this block */}
+            <div
+              className={`grid grid-cols-1 gap-8 ${people.length === 1 ? "md:grid-cols-1" :
+                  people.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"
+                }`}
+            >
+              {people.map((person, idx) => (
+                <div key={idx} className="flex flex-col items-center">
+                  <div className="aspect-square w-full max-w-[280px] team-image-wrapper  rounded-lg overflow-hidden">
+                    <div className="team-image-inner">
+                      <img
+                        src={person.photo || "/placeholder.svg"}
+                        alt={person.name}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.target.src = `/placeholder.svg?height=300&width=300&query=Portrait+of+${person.name}`;
+                        }}
+                      />
+                    </div>
+                  </div>
 
-      {/* IMAGE ONLY */}
-      <div className="aspect-square w-full max-w-[280px] team-image-wrapper  rounded-lg overflow-hidden">
-        <div className="team-image-inner">
-        <img
-          src={person.photo || "/placeholder.svg"}
-          alt={person.name}
-          className="w-full h-full object-cover"
-          onError={(e) => {
-            e.target.src = `/placeholder.svg?height=300&width=300&query=Portrait+of+${person.name}`;
-          }}
-        />
-        </div>
-      </div>
+                  <div className="text-center mt-4">
+                    <h4 className="text-lg font-bold text-white font-cinzel mb-1">
+                      {person.name}
+                    </h4>
+                    <p className="medieval-glow  text-xl font-semibold">
+                      {person.designation}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
 
-      {/* TEXT BOX (NOT CONNECTED TO IMAGE) */}
-      <div className="text-center mt-4">
-        <h4 className="text-lg font-bold text-white mb-1">
-          {person.name}
-        </h4>
-        <p className="text-accent font-semibold">
-          {person.designation}
-        </p>
-      </div>
-
-    </div>
-  ))}
-</div>
 
 
           </div>
