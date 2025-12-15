@@ -79,12 +79,21 @@ export default function Footer({ onNavigate }) {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-sm sm:text-base medievalsharp">
+        <div className="flex flex-col md:flex-row md:justify-between gap-6">
+          {/* Left: copyright */}
+          <div className="text-sm sm:text-base medievalsharp text-left">
             © {new Date().getFullYear()} INSIGHT — All rights reserved.
           </div>
-          <div className="text-sm sm:text-base opacity-95 medievalsharp">• Contact: info@example.com</div>
+
+          {/* Right: contacts */}
+          <div className="text-[16px] sm:text-base medievalsharp text-left md:text-right space-y-1">
+            <div className="opacity-95 font-semibold">Contacts</div>
+            <div className="opacity-90">Ansheel Salodkar: 7620416523</div>
+            <div className="opacity-90">Peter Salve: 9921336948</div>
+            <div className="opacity-90">Simran Bobde: 9545394495</div>
+          </div>
         </div>
+
       </div>
     </footer>
   );

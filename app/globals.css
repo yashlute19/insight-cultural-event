@@ -1215,13 +1215,18 @@ section {
     --app-height: 100vh;
   }
 }
+
+/* Override Tailwind min-h-screen safely */
 .min-h-screen {
   min-height: var(--app-height);
 }
-/* Ensure body always fills viewport */
-html,
+
+/* IMPORTANT: cover overscroll paint area */
+html {
+  background-color: black;
+}
+
 body {
   min-height: var(--app-height);
-  background-color: black; /* prevents white flash */
-  overscroll-behavior-y: none;
+  background-color: black;
 }

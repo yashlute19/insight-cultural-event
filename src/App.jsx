@@ -1,5 +1,6 @@
 "use client"
 
+import Loader from "./components/Loader";
 import { useState } from "react"
 import Navbar from "./components/Navbar"
 import Hero from "./components/Hero"
@@ -13,14 +14,31 @@ import TeamSection from "./components/TeamSection"
 
 function App() {
   const [activeSection, setActiveSection] = useState("home");
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const navigateTo = (id) => {
-    setActiveSection(id);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (id === activeSection) return;
+
+    setIsLoading(true);
+
+    // let loader render
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        setActiveSection(id);
+        window.scrollTo({ top: 0 });
+
+        // hide loader after section mounts
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 350);
+      }, 200);
+    });
   };
 
   return (
     <>
+      {isLoading && <Loader />}
       <Navbar
         activeSection={activeSection}
         setActiveSection={navigateTo}
