@@ -1,47 +1,16 @@
 // src/components/Footer.jsx
 "use client";
 
+import { scrollToSection } from "../lib/scrollToSection";
 import { Instagram, Youtube, Twitter } from "lucide-react";
-import { useRouter } from "next/navigation"; // optional; we use window.location for reliability
+import { useRouter, usePathname } from "next/navigation";
 
-export default function Footer() {
-  // Robust navigation helper:
-  // - if already on the homepage, smooth-scroll to the section id
-  // - otherwise, navigate the browser to "/#id" which will load root + jump to fragment
-  const jumpTo = (id) => (e) => {
-    e.preventDefault();
+export default function Footer({ onNavigate }) {
 
-    // defensive: run only on client
-    if (typeof window === "undefined") return;
-
-    const targetPath = "/";
-
-    // If currently on root path, try smooth scroll first
-    if (window.location.pathname === targetPath) {
-      const el = document.getElementById(id);
-      if (el) {
-        // close any open mobile nav if it exists (best-effort)
-        const mobileMenuBtn = document.querySelector("[data-mobile-menu-button]");
-        if (mobileMenuBtn) mobileMenuBtn.click?.();
-
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-        return;
-      }
-      // fallback: set hash so browser will try to jump
-      window.location.href = `${targetPath}#${id}`;
-      return;
-    }
-
-    // Not on root — navigate to root with fragment. Using location.href ensures browser handles the fragment jump.
-    // This will load the root page and the browser will jump to the fragment automatically.
-    window.location.href = `${targetPath}#${id}`;
-  };
 
   return (
     <footer
-      className="site-footer relative py-12 text-white "
-      
-    >
+      className="site-footer relative py-12 text-white">
       <div className="footer-separator" aria-hidden="true" />
       <div className="absolute inset-0 bg-black/60 pointer-events-none" aria-hidden="true" />
 
@@ -52,49 +21,59 @@ export default function Footer() {
             <p className="text-gray-300 medievalsharp">Annual College Cultural & Sports Carnival</p>
           </div>
 
-          {/* Quick Links: use onClick handler for robust fragment navigation */}
-          <div>
+          <div className="text-left">
+
             <h4 className="text-lg font-bold mb-4 medievalsharp">Quick Links</h4>
-            <ul className="space-y-2 text-gray-300">
-              <li>
-                <a href="/#home" onClick={jumpTo("home")} className="hover:text-accent transition-colors medievalsharp">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="/#points" onClick={jumpTo("points")} className="hover:text-accent transition-colors medievalsharp">
-                  Points Table
-                </a>
-              </li>
-              <li>
-                <a href="/#events" onClick={jumpTo("events")} className="hover:text-accent transition-colors medievalsharp">
-                  Events
-                </a>
-              </li>
-              <li>
-                <a href="/#gallery" onClick={jumpTo("gallery")} className="hover:text-accent transition-colors medievalsharp">
-                  Gallery
-                </a>
-              </li>
-              <li>
-                <a href="/#team" onClick={jumpTo("team")} className="hover:text-accent transition-colors medievalsharp">
-                  Team
-                </a>
-              </li>
+
+            <ul className="space-y-2">
+              {[
+                ["Home", "home"],
+                ["Points Table", "points"],
+                ["Events", "events"],
+                ["Gallery", "gallery"],
+                ["Team", "team"],
+              ].map(([label, id], index) => (
+                <li
+                  key={id}
+                  className="footer-link"
+                  style={{ animationDelay: `${index * 70}ms` }}
+                >
+                  <button
+                    onClick={() => onNavigate(id)}
+                    className="
+        relative
+        medievalsharp
+        transition-all duration-300 ease-out
+        hover:text-accent
+        hover:translate-x-1
+        focus:outline-none
+      "
+                  >
+                    {/* underline animation */}
+                    <span className="relative">
+                      {label}
+                      <span
+                        className="
+            absolute left-0 -bottom-0.5
+            h-[2px] w-0
+            bg-accent
+            transition-all duration-300
+            group-hover:w-full
+          "
+                      />
+                    </span>
+                  </button>
+                </li>
+              ))}
+
             </ul>
           </div>
 
           <div>
             <h4 className="text-lg font-bold mb-4 medievalsharp">Follow Us</h4>
             <div className="flex gap-4">
-              <a href="#" className="text-accent hover:text-accent-dark transition-colors">
+              <a href="https://www.instagram.com/_insight_2025/" className="text-accent hover:text-accent-dark transition-colors">
                 <Instagram size={24} />
-              </a>
-              <a href="#" className="text-accent hover:text-accent-dark transition-colors">
-                <Youtube size={24} />
-              </a>
-              <a href="#" className="text-accent hover:text-accent-dark transition-colors">
-                <Twitter size={24} />
               </a>
             </div>
           </div>

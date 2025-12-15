@@ -1185,3 +1185,43 @@ html {
   85% { transform: translateY(-402%); }
   100% { transform: translateY(-400%); }
 }
+section {
+  scroll-margin-top: 88px; /* match navbar height */
+}
+
+/* footer quick link animation */
+@keyframes footerFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.footer-link {
+  animation: footerFadeUp 0.45s ease-out both;
+}
+
+/* Fix mobile Chrome white gap caused by URL bar */
+:root {
+  --app-height: 100dvh;
+}
+
+@supports not (height: 100dvh) {
+  :root {
+    --app-height: 100vh;
+  }
+}
+.min-h-screen {
+  min-height: var(--app-height);
+}
+/* Ensure body always fills viewport */
+html,
+body {
+  min-height: var(--app-height);
+  background-color: black; /* prevents white flash */
+  overscroll-behavior-y: none;
+}

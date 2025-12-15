@@ -18,7 +18,7 @@ export default function About() {
                        shadow-[0_0_20px_rgba(0,128,128,0.5)] /* Adjusted shadow for green glow */
                        z-0" /* Set z-index lower than the content */
           />
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl border-2 border-green-600 p-6 sm:p-8 md:p-10 relative text-center z-10">
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl border-2 border-gray-600 p-6 sm:p-8 md:p-10 relative text-center z-10">
             <h2 className="text-4xl sm:text-5xl md:text-6xl medievalsharp text-center mb-6 medieval-glow font-bold">
               About INSIGHT
             </h2>
@@ -39,7 +39,7 @@ export default function About() {
         {/* -------------------------
             Glass Box 2: People Grid (separate box)
            ------------------------- */}
-        <div className="relative bg-white/8 backdrop-blur-sm rounded-2xl p-6 sm:p-8 md:p-10 shadow-xl overflow-hidden border-2 border-green-600">
+        <div className="relative bg-white/8 backdrop-blur-sm rounded-2xl p-6 sm:p-8 md:p-10 shadow-xl overflow-hidden border-2 border-gray-600">
           {/* subtle border/glow for the people box (lighter) */}
           <div
             aria-hidden="true"

@@ -36,58 +36,6 @@ export default function Navbar({ activeSection, setActiveSection }) {
     }, 60);
   };
 
-  // Update activeSection based on scroll position (runs on client)
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    let raf = null;
-    let timeout = null;
-
-    const sections = ["home", "points", "events", "gallery", "team"];
-
-    const check = () => {
-      let current = "home";
-      const targetLine = 160; // px from top to consider as "in view"
-
-      for (const sec of sections) {
-        const el = document.getElementById(sec);
-        if (!el) continue;
-        const rect = el.getBoundingClientRect();
-        if (rect.top <= targetLine && rect.bottom >= 120) {
-          current = sec;
-          break;
-        }
-      }
-
-      // Only update if changed
-      if (current !== activeSection) {
-        setActiveSection(current);
-      }
-    };
-
-    const onScroll = () => {
-      if (raf) cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(check);
-
-      // also throttle fallback
-      if (timeout) clearTimeout(timeout);
-      timeout = setTimeout(() => {
-        check();
-      }, 150);
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    // run once initially to set state correctly
-    check();
-
-    return () => {
-      if (raf) cancelAnimationFrame(raf);
-      if (timeout) clearTimeout(timeout);
-      window.removeEventListener("scroll", onScroll);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // run once on mount
-
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 navbar-glass border-b border-white/10">
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">

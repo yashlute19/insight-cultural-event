@@ -12,50 +12,57 @@ import Gallery from "./components/Gallery"
 import TeamSection from "./components/TeamSection"
 
 function App() {
-  const [activeSection, setActiveSection] = useState("home")
+  const [activeSection, setActiveSection] = useState("home");
+
+  const navigateTo = (id) => {
+    setActiveSection(id);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
-    <div className="text-foreground">
-      <Navbar activeSection={activeSection} setActiveSection={setActiveSection} />
+    <>
+      <Navbar
+        activeSection={activeSection}
+        setActiveSection={navigateTo}
+      />
 
       {activeSection === "home" && (
-        <div id="home">
+        <>
           <Hero />
           <About />
-          <Footer />
-        </div>
+          <Footer onNavigate={navigateTo} />
+        </>
       )}
 
       {activeSection === "points" && (
-        // removed bg-black so background video shows through
-        <div id="points" className="pt-16 sm:pt-20 min-h-screen">
+        <>
           <CulturalPointsTable />
-          <Footer />
-        </div>
+          <Footer onNavigate={navigateTo} />
+        </>
       )}
 
       {activeSection === "events" && (
-        <div id="events" className="pt-16 sm:pt-20 min-h-screen">
+        <>
           <EventsTimeline />
-          <Footer />
-        </div>
+          <Footer onNavigate={navigateTo} />
+        </>
       )}
 
       {activeSection === "gallery" && (
-        <div id="gallery" className="pt-16 sm:pt-20 min-h-screen">
+        <>
           <Gallery />
-          <Footer />
-        </div>
+          <Footer onNavigate={navigateTo} />
+        </>
       )}
 
       {activeSection === "team" && (
-        <div id="team" className="pt-16 sm:pt-20 min-h-screen">
+        <>
           <TeamSection />
-          <Footer />
-        </div>
+          <Footer onNavigate={navigateTo} />
+        </>
       )}
-    </div>
-  )
+    </>
+  );
 }
 
 export default App

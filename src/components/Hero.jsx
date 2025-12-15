@@ -42,7 +42,7 @@ export default function Hero() {
   const pad = (n) => String(n).padStart(2, "0");
 
   return (
-    <section id="home" className="relative min-h-screen w-full flex flex-col items-center justify-center px-4 overflow-hidden">
+    <section id="home" className="relative min-h-screen w-full flex flex-col items-center justify-center px-4">
       <div className="relative z-10 flex flex-col items-center mb-6">
         <Image
           src="/Insight-name.webp"

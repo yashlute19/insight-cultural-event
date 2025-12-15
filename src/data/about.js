@@ -8,12 +8,12 @@ innovative display of talent. INSIGHT  brings together students from all departm
     {
       name: "Dr. Vijay M. Wadhai",
       designation: "Principal",
-      photo: "#",
+      photo: "/Principal.webp",
     },
     {
       name: "Dr. Fr. Paul Chandrankunnel",
       designation: "Director",
-      photo: "#",
+      photo: "/director_paul_chandrankunnel.webp",
     },
   ],
 }

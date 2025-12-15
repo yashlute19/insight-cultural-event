@@ -54,8 +54,8 @@ export default function RootLayout({
       <body>
         <div
           className="fixed inset-0 pointer-events-none z-0"
-          aria-hidden="true"
           style={{
+            height: "var(--app-height)",
             backgroundImage: "url('/hero-background.webp')",
             backgroundSize: "cover",
             backgroundPosition: "center",
@@ -63,7 +63,10 @@ export default function RootLayout({
             filter: "saturate(1.05) contrast(1.03)",
             WebkitFilter: "saturate(1.05) contrast(1.03)",
           }}
+          aria-hidden="true"
         >
+
+
           {/* subtle golden overlay to preserve carnival tone */}
           <div
             style={{
@@ -77,7 +80,8 @@ export default function RootLayout({
         </div>
 
         {/* Page content sits above the background. ClientRoot handles loader + fades. */}
-        <div className="relative z-20 min-h-screen overflow-x-hidden">
+        <div className="relative z-20 min-h-[var(--app-height)] overflow-x-hidden pt-16 sm:pt-20">
+
           <ClientRoot>{children}</ClientRoot>
         </div>
       </body>

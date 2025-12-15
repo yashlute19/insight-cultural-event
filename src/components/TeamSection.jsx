@@ -20,8 +20,7 @@ export default function TeamSection() {
 
               {/* --- Conditional layout: grid for full rows, centered flex for small groups --- */}
               {isSmallGroup ? (
-                /* Centered flex row on desktop, but keep fixed card width so sizes don't change */
-                <div className="flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap lg:justify-center gap-8">
+                <div className="flex flex-col items-center sm:flex-row sm:flex-wrap sm:justify-center lg:flex-nowrap gap-8">
                   {members.map((member) => (
                     <div key={member.id} className="flex flex-col items-center w-[260px]">
                       <div className="team-image-wrapper w-full">
@@ -30,16 +29,15 @@ export default function TeamSection() {
                             src={member.photo || "/placeholder.svg"}
                             alt={member.name}
                             className="w-full h-full object-cover"
-                            onError={(e) => {
-                              e.target.src = `/placeholder.svg?height=300&width=300&query=Portrait+of+${member.name}`;
-                            }}
                           />
                         </div>
                       </div>
 
                       <div className="p-4 text-center text-white">
-                        <h4 className="text-2xl font-bold mb-1 medievalsharp text-white">{member.name}</h4>
-                        <p className="text-lg font-semibold medievalsharp medieval-glow text-white">{member.role}</p>
+                        <h4 className="text-2xl font-bold mb-1 medievalsharp">{member.name}</h4>
+                        <p className="text-lg font-semibold medievalsharp medieval-glow">
+                          {member.role}
+                        </p>
                       </div>
                     </div>
                   ))}

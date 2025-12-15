@@ -61,17 +61,15 @@ export default function EventModal({ event, onClose }) {
         {/* overlay */}
         <div
           onClick={handleClose}
-          className={`absolute inset-0 bg-black transition-opacity duration-300 ${
-            visible ? "opacity-70" : "opacity-0 pointer-events-none"
-          }`}
+          className={`absolute inset-0 bg-black transition-opacity duration-300 ${visible ? "opacity-70" : "opacity-0 pointer-events-none"
+            }`}
           aria-hidden="true"
         />
 
         {/* dialog (fade + slide) */}
         <div
-          className={`relative w-full md:max-w-5xl mx-4 md:mx-0 rounded-t-lg md:rounded-lg overflow-hidden transition-all duration-300 transform ${
-            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-          }`}
+          className={`relative w-full md:max-w-5xl mx-4 md:mx-0 rounded-t-lg md:rounded-lg overflow-hidden transition-all duration-300 transform ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            }`}
           style={{ willChange: "opacity, transform" }}
         >
           {/* glassy container */}
@@ -82,7 +80,8 @@ export default function EventModal({ event, onClose }) {
               <div
                 className="modal-bg-blur absolute inset-0 z-10"
                 style={{
-                  backgroundImage: `url("${event.posterBlur || event.poster || '/placeholder.svg'}")`,
+                  backgroundImage: `url("${event.poster}-800.webp")`,
+
                 }}
                 aria-hidden="true"
               />
@@ -97,16 +96,15 @@ export default function EventModal({ event, onClose }) {
                 aria-label={`Open ${event.name} image in full view`}
               >
                 <img
-                  src={event.poster || "/placeholder.svg"}
+                  src={`${event.poster}-1200.webp`}
                   alt={event.name}
                   className="modal-img-foreground max-w-full max-h-full object-contain cursor-zoom-in"
                   onError={(e) => {
-                    e.target.src = `/placeholder.svg?height=480&width=800&query=${encodeURIComponent(
-                      event.name || "event"
-                    )}+poster`;
+                    e.target.src = "/placeholder.svg";
                   }}
                   draggable={false}
                 />
+
               </div>
             </div>
 
@@ -160,13 +158,13 @@ export default function EventModal({ event, onClose }) {
                 )}
               </div>
 
-             
-                
-              </div>
+
+
             </div>
           </div>
         </div>
-      
+      </div>
+
 
       {/* Fullscreen viewer overlay (when zoomed) */}
       {zoomed && (
@@ -183,25 +181,22 @@ export default function EventModal({ event, onClose }) {
           >
             {/* image itself — natural size shown up to max viewport */}
             <img
-              src={event.poster || "/placeholder.svg"}
+              src={`${event.poster}-1200.webp`}
               alt={event.name}
-              className="block"
               style={{
-                width: "auto",
-                height: "auto",
                 maxWidth: "98vw",
                 maxHeight: "98vh",
-                display: "block",
                 margin: "0 auto",
               }}
               draggable={false}
             />
 
-          
-             
-            </div>
+
+
+
           </div>
-      
+        </div>
+
       )}
     </>
   );
