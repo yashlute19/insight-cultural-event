@@ -1,25 +1,24 @@
-import sharp from "sharp";
+// scripts/optimize-table-bg.js
+const sharp = require("sharp");
 
 async function optimizeTableBg() {
   try {
-    // 1️⃣ Optimize main background
-    await sharp("public/table-bg.webp")
+    await sharp("public/table-bg-new.webp")
       .resize({
-        width: 1600,            // perfect for full-width desktop
-        withoutEnlargement: true
+        width: 1600,
+        withoutEnlargement: true,
       })
       .webp({
-        quality: 70,            // sweet spot for backgrounds
-        effort: 6,              // better compression
-        smartSubsample: true
+        quality: 70,
+        effort: 6,
+        smartSubsample: true,
       })
-      .toFile("public/table-bg-optimized.webp");
+      .toFile("public/table-bg-optimized-new.webp");
 
-    // 2️⃣ Create blur placeholder
-    await sharp("public/table-bg-optimized.webp")
+    await sharp("public/table-bg-optimized-new.webp")
       .resize(20)
       .webp({ quality: 35 })
-      .toFile("public/table-bg-blur.webp");
+      .toFile("public/table-bg-blur-new.webp");
 
     console.log(" Table background optimized successfully");
   } catch (err) {

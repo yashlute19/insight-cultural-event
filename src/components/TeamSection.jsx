@@ -21,15 +21,21 @@ export default function TeamSection() {
               {/* --- Conditional layout: grid for full rows, centered flex for small groups --- */}
               {isSmallGroup ? (
                 <div className="flex flex-col items-center sm:flex-row sm:flex-wrap sm:justify-center lg:flex-nowrap gap-8">
-                  {members.map((member) => (
+                  {members.map((member, index) => (
+
                     <div key={member.id} className="flex flex-col items-center w-[260px]">
                       <div className="team-image-wrapper w-full">
                         <div className="team-image-inner">
                           <img
                             src={member.photo || "/placeholder.svg"}
                             alt={member.name}
+                            loading={index < 4 ? "eager" : "lazy"}
+                            fetchpriority={index < 4 ? "high" : "auto"}
+                            decoding="async"
                             className="w-full h-full object-cover"
                           />
+
+
                         </div>
                       </div>
 
@@ -45,18 +51,22 @@ export default function TeamSection() {
               ) : (
                 /* Original 4-column grid for 4+ members (keeps original behaviour) */
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                  {members.map((member) => (
+                  {members.map((member, index) => (
+
                     <div key={member.id} className="flex flex-col items-center">
                       <div className="team-image-wrapper max-w-[260px] w-full">
                         <div className="team-image-inner">
                           <img
                             src={member.photo || "/placeholder.svg"}
                             alt={member.name}
+                            loading={index < 4 ? "eager" : "lazy"}
+                            fetchpriority={index < 4 ? "high" : "auto"}
+
+                            decoding="async"
                             className="w-full h-full object-cover"
-                            onError={(e) => {
-                              e.target.src = `/placeholder.svg?height=300&width=300&query=Portrait+of+${member.name}`;
-                            }}
                           />
+
+
                         </div>
                       </div>
 

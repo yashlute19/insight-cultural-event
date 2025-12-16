@@ -67,12 +67,12 @@ export default function CulturalPointsTable() {
 
                 {/* BACKGROUND IMAGE (HIGH PRIORITY) */}
                 <Image
-                  src="/table-bg-optimized.webp"
+                  src="/table-bg-optimized-new.webp"
                   alt=""
                   fill
                   priority
                   placeholder="blur"
-                  blurDataURL="/table-bg-blur.webp"
+                  blurDataURL="/table-bg-blur-new.webp"
                   className="object-cover object-center z-0"
                 />
                 {/* DARK OVERLAY */}

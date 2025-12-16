@@ -1,9 +1,18 @@
 "use client"
 import DomeGallery from './DomeGallery'
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { galleryData } from "../data/gallery"
 
+
+
 export default function Gallery() {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setReady(true), 400); // match loader
+    return () => clearTimeout(t);
+  }, []);
+ 
   return (
     <section id="gallery" className="pt-10 sm:pt-12 pb-16 bg-transparent">
       {/* Title: visible only on mobile/small screens */}
@@ -19,6 +28,7 @@ export default function Gallery() {
       <div className="w-full flex justify-center overflow-visible">
         {/* Mobile view: smaller height, contained */}
         <div className="md:hidden px-2" style={{ width: '100%', height: '500px' }}>
+          {ready && (
           <DomeGallery 
             images={galleryData}
             fit={0.4}
@@ -37,11 +47,13 @@ export default function Gallery() {
             openedImageBorderRadius="20px"
             grayscale={false}
           />
+          )}
         </div>
 
         {/* Desktop view: centered, fully visible with smaller segments */}
         <div className="hidden md:flex md:justify-center -mt-14 mb-40 md:items-center relative w-85%" style={{ height: '700px', overflow: 'visible' }}>
           <div style={{ width: '87vw', height: '95vh', overflow: 'visible' }}>
+            {ready && (
             <DomeGallery 
               images={galleryData}
               fit={0.5}
@@ -60,6 +72,7 @@ export default function Gallery() {
               openedImageBorderRadius="20px"
               grayscale={false}
             />
+            )}
           </div>
         </div>
       </div>

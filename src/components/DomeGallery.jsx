@@ -113,7 +113,7 @@ export default function DomeGallery({
     fitBasis = 'auto',
     minRadius = 600,
     maxRadius = Infinity,
-    padFactor = 0.25,
+    padFactor = 0.1,
     overlayBlurColor = '#060010',
     maxVerticalRotationDeg = DEFAULTS.maxVerticalRotationDeg,
     dragSensitivity = DEFAULTS.dragSensitivity,
@@ -833,11 +833,18 @@ export default function DomeGallery({
                                     >
                                         {it.src ? (
                                             <Image
+                                                key={i}
                                                 src={it.src}
                                                 alt={it.alt || "gallery image"}
-                                                width={500}
-                                                height={300}
+                                                width={320}
+                                                height={200}
+                                                sizes="(max-width: 768px) 120px, 180px"
+                                                placeholder="blur"
+                                                blurDataURL="/gallery-blur.webp"
+                                                decoding="async"
                                                 draggable={false}
+                                                priority={i < 3}
+                                                loading={i < 3 ? "eager" : "lazy"}
                                             />
                                         ) : null}
 
