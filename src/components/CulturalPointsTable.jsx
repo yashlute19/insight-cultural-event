@@ -63,17 +63,20 @@ export default function CulturalPointsTable() {
             {/* --- Replace the current cultural-table-wrap block with this --- */}
             <div className="relative w-full max-w-4xl cultural-table-wrap">
 
-              {/* Background as CSS image (no <img> tag) — use aspect-ratio so container matches image */}
-              <div
-                className="cultural-video-inner bg-cover bg-center"
-                style={{
-                  backgroundImage: "url('/table-bg.webp')",
-                  // fallback aspect ratio — change to match your image natural ratio if different (16/9 is common)
-                  minHeight: "100%",
-                }}
-              >
-                {/* Overlay sits above the background */}
-                <div className="cultural-video-overlay" aria-hidden="true" />
+              <div className="relative cultural-video-inner">
+
+                {/* BACKGROUND IMAGE (HIGH PRIORITY) */}
+                <Image
+                  src="/table-bg-optimized.webp"
+                  alt=""
+                  fill
+                  priority
+                  placeholder="blur"
+                  blurDataURL="/table-bg-blur.webp"
+                  className="object-cover object-center z-0"
+                />
+                {/* DARK OVERLAY */}
+                <div className="cultural-video-overlay absolute inset-0 z-10" />
 
                 {/* TABLE CONTENT — sits on top of the bg (same DOM parent) */}
                 <div className="relative z-30 p-6 cultural-table-content">

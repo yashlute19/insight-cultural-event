@@ -72,9 +72,15 @@ export default function Footer({ onNavigate }) {
           <div>
             <h4 className="text-lg font-bold mb-4 medievalsharp">Follow Us</h4>
             <div className="flex gap-4">
-              <a href="https://www.instagram.com/_insight_2025/" className="text-accent hover:text-accent-dark transition-colors">
-                <Instagram size={24} />
-              </a>
+              <a
+  href="https://www.instagram.com/_insight_2025/"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="text-accent hover:text-accent-dark transition-colors"
+>
+  <Instagram size={24} />
+</a>
+
             </div>
           </div>
         </div>
