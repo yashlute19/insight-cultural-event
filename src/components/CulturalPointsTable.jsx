@@ -1,6 +1,7 @@
 // CulturalPointsTable.jsx — patched: debug + dedupe + safe keys
 import React, { useEffect } from "react";
 import { departmentsData } from "../data/departments";
+import Image from "next/image";
 
 export default function CulturalPointsTable() {
   useEffect(() => {
