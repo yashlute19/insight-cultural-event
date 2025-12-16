@@ -1,7 +1,8 @@
 // EventModal.jsx — adds clickable fullscreen image viewer
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect, useRef } from "react";
+
 
 const TrophyIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-5">
@@ -38,6 +39,25 @@ export default function EventModal({ event, onClose }) {
 
   const [visible, setVisible] = useState(false);
   const [zoomed, setZoomed] = useState(false);
+  const [imgIndex, setImgIndex] = useState(0);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+
+  useEffect(() => {
+  const onPopState = () => {
+    // If fullscreen is open → close fullscreen first
+    if (zoomed) {
+      setZoomed(false);
+      return;
+    }
+    // Otherwise close modal
+    handleClose();
+  };
+
+  window.addEventListener("popstate", onPopState);
+  return () => window.removeEventListener("popstate", onPopState);
+}, [zoomed]);
+
 
   useEffect(() => {
     // show animation
@@ -64,22 +84,98 @@ export default function EventModal({ event, onClose }) {
 
   if (!event) return null;
 
-  const handleClose = () => {
-    // run hide animation then call parent's onClose
-    setVisible(false);
-    setTimeout(() => {
-      onClose && onClose();
-    }, 300); // match transition duration below
+  const images = event.images && event.images.length > 0
+    ? event.images
+    : [event.poster];
+
+  useEffect(() => {
+    setImgIndex(0);
+  }, [event]);
+
+  useEffect(() => {
+  if (!images || images.length <= 1) return;
+
+  const preload = (index) => {
+    const img = new Image();
+    img.src = `${images[index]}-800.webp`;
   };
+
+  preload((imgIndex + 1) % images.length);
+  preload((imgIndex - 1 + images.length) % images.length);
+  }, [imgIndex, images]);
+
+  useEffect(() => {
+  const handleKey = (e) => {
+    if (!images || images.length <= 1) return;
+
+    if (e.key === "ArrowRight") {
+      setImgIndex((i) => (i + 1) % images.length);
+    }
+    if (e.key === "ArrowLeft") {
+      setImgIndex((i) => (i === 0 ? images.length - 1 : i - 1));
+    }
+    if (e.key === "Escape") {
+      setZoomed(false);
+    }
+  };
+
+  window.addEventListener("keydown", handleKey);
+  return () => window.removeEventListener("keydown", handleKey);
+  }, [images]);
+
+  const onTouchStart = (e) => {
+  touchStartX.current = e.changedTouches[0].screenX;
+};
+
+const onTouchEnd = (e) => {
+  touchEndX.current = e.changedTouches[0].screenX;
+  handleSwipe();
+};
+
+const handleSwipe = () => {
+  const diff = touchStartX.current - touchEndX.current;
+  if (Math.abs(diff) < 50) return; // threshold
+
+  if (diff > 0) {
+    setImgIndex((i) => (i + 1) % images.length);
+  } else {
+    setImgIndex((i) => (i === 0 ? images.length - 1 : i - 1));
+  }
+};
+
+
+
+
+
+
+  const handleClose = () => {
+  setVisible(false);
+  setTimeout(() => {
+    onClose && onClose();
+    window.history.back();
+  }, 300);
+};
+
 
   // open fullscreen viewer
   const openViewer = (e) => {
-    e.stopPropagation();
-    setZoomed(true);
-  };
+  e.stopPropagation();
+  window.history.pushState({ viewer: "image" }, "");
+  setZoomed(true);
+};
 
   // close viewer
-  const closeViewer = () => setZoomed(false);
+  const closeViewer = () => {
+  setZoomed(false);
+  window.history.back();
+};
+
+
+  const metaCount =
+  (event.date ? 1 : 0) +
+  (event.prizePool ? 1 : 0) +
+  (event.entryFee ? 1 : 0);
+
 
   return (
     <>
@@ -122,7 +218,7 @@ export default function EventModal({ event, onClose }) {
 
               {/* foreground image — click to open full-screen viewer */}
               <div
-                className="relative z-30 w-full h-full flex items-center justify-center p-4"
+                className="relative z-30 w-full h-full flex items-center justify-center p-4 transition-opacity duration-200"
                 onClick={openViewer}
                 role="button"
                 tabIndex={0}
@@ -130,14 +226,72 @@ export default function EventModal({ event, onClose }) {
                 aria-label={`Open ${event.name} image in full view`}
               >
                 <img
-                  src={`${event.poster}-1200.webp`}
+                  src={`${images[imgIndex]}-1200.webp`}
+                  srcSet={`
+    ${images[imgIndex]}-400.webp 400w,
+    ${images[imgIndex]}-800.webp 800w,
+    ${images[imgIndex]}-1200.webp 1200w
+  `}
+                  sizes="(max-width: 768px) 90vw, 50vw"
                   alt={event.name}
                   className="modal-img-foreground max-w-full max-h-full object-contain cursor-zoom-in"
-                  onError={(e) => {
-                    e.target.src = "/placeholder.svg";
-                  }}
                   draggable={false}
+                  onTouchStart={onTouchStart}
+                  onTouchEnd={onTouchEnd}
+
                 />
+
+                {images.length > 1 && (
+  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-40">
+    {images.map((_, i) => (
+      <button
+        key={i}
+        onClick={(e) => {
+          e.stopPropagation();
+          setImgIndex(i);
+        }}
+        className={`w-2.5 h-2.5 rounded-full transition-all ${
+          i === imgIndex ? "bg-white scale-110" : "bg-white/40"
+        }`}
+        aria-label={`Go to image ${i + 1}`}
+      />
+    ))}
+  </div>
+)}
+
+                {images.length > 1 && (
+                  <>
+                    {/* LEFT */}
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setImgIndex((i) => (i === 0 ? images.length - 1 : i - 1));
+                      }}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 z-40
+                 bg-black/60 hover:bg-black/80
+                 p-2 rounded-full text-white text-xl"
+                      aria-label="Previous image"
+                    >
+                      ‹
+                    </button>
+
+                    {/* RIGHT */}
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setImgIndex((i) => (i + 1) % images.length);
+                      }}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 z-40
+                 bg-black/60 hover:bg-black/80
+                 p-2 rounded-full text-white text-xl"
+                      aria-label="Next image"
+                    >
+                      ›
+                    </button>
+                  </>
+                )}
+
+
 
               </div>
             </div>
@@ -154,55 +308,68 @@ export default function EventModal({ event, onClose }) {
               </div>
 
               {/* description & extra images */}
-              <div className="mt-6 text-neutral-200 space-y-4">
+              <div className="mt-6 text-neutral-200 space-y-4 text-center flex flex-col items-center">
                 <div>
-                  <h3 className="text-2xl font-semibold text-white mb-2 medieval-glow medievalsharp">About Event</h3>
+                  <h3 className="text-4xl font-semibold text-white mb-6 medieval-glow medievalsharp">About Event</h3>
                   <p className="leading-relaxed text-lg">{event.description}</p>
-                  {/* Date */}
-                  {(event.date) && (
-                    <div>
-                      <h4 className="text-lg pt-4 medievalsharp text-white mb-1">Event Details</h4>
-                      <p className="text-base flex items-center gap-2">
-                        <CalendarIcon />
-                        {formatDateDDMMYYYY(event.date)}
+                  <div
+  className={`grid grid-cols-2 gap-x-6 gap-y-8 pt-12 w-full max-w-md mx-auto ${
+    metaCount === 1 ? "justify-items-center" : ""
+  }`}
+>
 
-                      </p>
 
-                    </div>
-                  )}
+                    {/* Event Date */}
+                    {event.date && (
+                      <div className="flex flex-col items-center">
+                        <h4 className="text-lg medievalsharp text-white mb-1">Event Date</h4>
+                        <p className="text-base flex items-center gap-2">
+                          <CalendarIcon />
+                          {formatDateDDMMYYYY(event.date)}
+                        </p>
+                      </div>
+                    )}
 
-                  {/* Prize Pool */}
-                  {event.prizePool && (
-                    <div>
-                      <h4 className="text-lg pt-4 medievalsharp text-white mb-1">Prize Pool</h4>
-                      <p className="text-base flex items-center gap-2">
-                        <TrophyIcon />
-                        {event.prizePool}
-                      </p>
-                    </div>
-                  )}
+                    {/* Prize Pool */}
+                    {event.prizePool && (
+                      <div className="flex flex-col items-center">
+                        <h4 className="text-lg medievalsharp text-white mb-1">Prize Pool</h4>
+                        <p className="text-base flex items-center gap-2">
+                          <TrophyIcon />
+                          {event.prizePool}
+                        </p>
+                      </div>
+                    )}
 
-                  {/* Entry Fee */}
-                  {event.entryFee && (
-                    <div>
-                      <h4 className="text-lg medievalsharp pt-4 text-white mb-1">Entry Fee</h4>
-                      <p className="text-base flex items-center gap-2">
-                        <CashIcon />
-                        {event.entryFee}
-                      </p>
-                    </div>
-                  )}
+                    {/* Entry Fee — centered below */}
+                    {event.entryFee && (
+                      <div
+  className={`flex flex-col items-center ${
+    metaCount === 3 ? "col-span-2" : ""
+  }`}
+>
+
+                        <h4 className="text-lg medievalsharp text-white mb-1">Entry Fee</h4>
+                        <p className="text-base flex items-center gap-2">
+                          <CashIcon />
+                          {event.entryFee}
+                        </p>
+                      </div>
+                    )}
+
+                  </div>
 
                   {/* Contacts */}
                   {event.contacts && event.contacts.length > 0 && (
                     <div>
-                      <h4 className="text-lg medievalsharp pt-4 text-white mb-2">Contact</h4>
+                      <h4 className="text-lg medievalsharp pt-14 text-white mb-2">Contact</h4>
                       <div className="space-y-2">
                         {event.contacts.map((c, i) => (
                           <div
                             key={i}
-                            className="flex flex-col text-sm sm:text-base"
+                            className="flex flex-col items-center text-sm sm:text-base text-center"
                           >
+
                             <span className="font-medium">
                               {c.name} — <span className="opacity-80">{c.role}</span>
                             </span>
@@ -235,6 +402,7 @@ export default function EventModal({ event, onClose }) {
                             e.target.src = "/placeholder.svg";
                           }}
                           draggable={false}
+                          
                         />
                       ))}
                     </div>
@@ -265,7 +433,7 @@ export default function EventModal({ event, onClose }) {
       {/* Fullscreen viewer overlay (when zoomed) */}
       {zoomed && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 transition-opacity duration-200"
           onClick={closeViewer}
           role="dialog"
           aria-modal="true"
@@ -277,7 +445,13 @@ export default function EventModal({ event, onClose }) {
           >
             {/* image itself — natural size shown up to max viewport */}
             <img
-              src={`${event.poster}-1200.webp`}
+              src={`${images[imgIndex]}-1200.webp`}
+              srcSet={`
+    ${images[imgIndex]}-400.webp 400w,
+    ${images[imgIndex]}-800.webp 800w,
+    ${images[imgIndex]}-1200.webp 1200w
+  `}
+              sizes="100vw"
               alt={event.name}
               style={{
                 maxWidth: "98vw",
@@ -285,7 +459,58 @@ export default function EventModal({ event, onClose }) {
                 margin: "0 auto",
               }}
               draggable={false}
+              onTouchStart={onTouchStart}
+              onTouchEnd={onTouchEnd}
+
             />
+
+            {images.length > 1 && (
+  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-40">
+    {images.map((_, i) => (
+      <button
+        key={i}
+        onClick={(e) => {
+          e.stopPropagation();
+          setImgIndex(i);
+        }}
+        className={`w-2.5 h-2.5 rounded-full transition-all ${
+          i === imgIndex ? "bg-white scale-110" : "bg-white/40"
+        }`}
+        aria-label={`Go to image ${i + 1}`}
+      />
+    ))}
+  </div>
+)}
+
+            {images.length > 1 && (
+              <>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setImgIndex((i) => (i === 0 ? images.length - 1 : i - 1));
+                  }}
+                  className="fixed left-4 top-1/2 -translate-y-1/2 z-[120]
+                 bg-black/60 hover:bg-black/80
+                 p-3 rounded-full text-white text-2xl"
+                >
+                  ‹
+                </button>
+
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setImgIndex((i) => (i + 1) % images.length);
+                  }}
+                  className="fixed right-4 top-1/2 -translate-y-1/2 z-[120]
+                 bg-black/60 hover:bg-black/80
+                 p-3 rounded-full text-white text-2xl"
+                >
+                  ›
+                </button>
+              </>
+            )}
+
+
 
 
 

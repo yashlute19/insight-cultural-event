@@ -130,7 +130,11 @@ export default function Events() {
                         aria-hidden="true"
                       />
                       <div className="pl-4">
-                        <EventCard ev={ev} onOpen={() => setOpen(ev.id)} />
+                        <EventCard ev={ev} onOpen={() => {
+  window.history.pushState({ modal: "event" }, "");
+  setOpen(ev.id);
+}}
+/>
                       </div>
                     </div>
                   </div>
@@ -176,13 +180,21 @@ export default function Events() {
                       {/* left-column: push card toward center on md+ */}
                       <div className={`${isLeft ? "md:flex md:justify-end" : "md:hidden"}`}>
                         <div className="w-full md:w-auto">
-                          <EventCard ev={ev} onOpen={() => setOpen(ev.id)} />
+                          <EventCard ev={ev} onOpen={() => {
+  window.history.pushState({ modal: "event" }, "");
+  setOpen(ev.id);
+}}
+ />
                         </div>
                       </div>
 
 
                       <div className="md:hidden mt-4">
-                        {!isLeft && <EventCard ev={ev} onOpen={() => setOpen(ev.id)} />}
+                        {!isLeft && <EventCard ev={ev} onOpen={() => {
+  window.history.pushState({ modal: "event" }, "");
+  setOpen(ev.id);
+}}
+ />}
                       </div>
                     </div>
 
@@ -212,7 +224,11 @@ export default function Events() {
                       {/* right-column: keep card to the left edge of its column (toward center) */}
                       <div className={`${!isLeft ? "md:flex md:justify-start" : "md:hidden"}`}>
                         <div className="w-full md:w-auto">
-                          <EventCard ev={ev} onOpen={() => setOpen(ev.id)} />
+                          <EventCard ev={ev} onOpen={() => {
+  window.history.pushState({ modal: "event" }, "");
+  setOpen(ev.id);
+}}
+ />
                         </div>
                       </div>
 

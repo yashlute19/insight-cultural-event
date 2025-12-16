@@ -6,6 +6,11 @@ export const events = [
     date: "2025-12-20",
     time: "18:00",
     poster: "/events/SURSANGAM",
+    images: [
+    "/events/SURSANGAM",
+    "/events/SURSANGAM-2",
+    "/events/SURSANGAM-3",
+    ],
     description:
       "Sursangam is the ultimate platform for singers to shine, blending powerful voices, creative performances, and guidance from top judges for an unforgettable musical adventure.",
 
@@ -30,6 +35,11 @@ export const events = [
     date: "2025-12-21",
     time: "20:00",
     poster: "/events/RIWAAZ",
+    images: [
+    "/events/RIWAAZ",
+    "/events/RIWAAZ-2",
+    "/events/RIWAAZ-3",
+    ],
     description:
       "Threads of gold and shades of night, Weaving dreams in the spotlight bright. Fashion is art that breathes and moves, In every step, the spirit grooves.",
     
@@ -86,6 +96,11 @@ export const events = [
     date: "2025-12-15",
     time: "16:00",
     poster: "/events/STROKESOFART",
+    images: [
+    "/events/STROKESOFART",
+    "/events/STROKESOFART-2",
+    "/events/STROKESOFART-3",
+    ],
     description:
       "A legendary title reserved for those rare artists whose skill is unmatched and whose legacy defines the art form.",
     prizePool: "₹5,000",
@@ -109,6 +124,11 @@ export const events = [
     date: "2025-12-21",
     time: "21:30",
     poster: "/events/NATSAMRAT",
+    images: [
+    "/events/NATSAMRAT",
+    "/events/NATSAMRAT-2",
+    "/events/NATSAMRAT-3",
+    ],
     description:
       "A legendary title reserved for those rare actors whose skill on stage is unmatched and whose legacy defines the art form.",
     entryFee: "Free Entry",
@@ -136,6 +156,11 @@ export const events = [
     date: "2025-12-20",
     time: "21:30",
     poster: "/events/MATCHTHEBEATS",
+    images: [
+    "/events/MATCHTHEBEATS",
+    "/events/MATCHTHEBEATS-2",
+    "/events/MATCHTHEBEATS-3",
+    ],
     description:
       "A legendary title reserved for those rare dance performers whose skill on stage is unmatched and whose legacy defines the art form.",
     prizePool: "₹6,000",
@@ -159,6 +184,10 @@ export const events = [
     date: "2025-12-20",
     time: "21:30",
     poster: "/events/ALFAAZ",
+    images: [
+    "/events/ALFAAZ",
+    "/events/ALFAAZ-2",
+    "/events/ALFAAZ-3",],
     description:
       "A legendary title reserved for those rare writers whose skill on stage is unmatched and whose legacy defines the art form.",
     prizePool: "₹5,000",
