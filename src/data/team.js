@@ -2,7 +2,7 @@ export const teamData = {
   "LEAD TEAM": [
     {
       id: 1,
-      name: "Justine Augustine",
+      name: "Ashley Joseph",
       role: "MENTOR",
       photo: "#",
     },

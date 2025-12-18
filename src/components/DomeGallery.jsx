@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useRef, useCallback } from 'react';
 import { useGesture } from '@use-gesture/react';
+import Image from "next/image";
+
 
 const DEFAULT_IMAGES = [
     {
@@ -832,20 +834,21 @@ export default function DomeGallery({
                                         }}
                                     >
                                         {it.src ? (
-                                            <Image
-                                                key={i}
-                                                src={it.src}
-                                                alt={it.alt || "gallery image"}
-                                                width={320}
-                                                height={200}
-                                                sizes="(max-width: 768px) 120px, 180px"
-                                                placeholder="blur"
-                                                blurDataURL="/gallery-blur.webp"
-                                                decoding="async"
-                                                draggable={false}
-                                                priority={i < 3}
-                                                loading={i < 3 ? "eager" : "lazy"}
-                                            />
+                                            <div className="relative w-full h-full">
+                                                <Image
+                                                    src={it.src}
+                                                    alt={it.alt || "gallery image"}
+                                                    fill
+                                                    sizes="(max-width: 768px) 120px, 180px"
+                                                    className="object-cover"
+                                                    placeholder="blur"
+                                                    blurDataURL="/gallery-blur.webp"
+                                                    decoding="async"
+                                                    draggable={false}
+                                                    priority={i < 3}
+                                                />
+                                            </div>
+
                                         ) : null}
 
                                     </div>

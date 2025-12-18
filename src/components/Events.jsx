@@ -116,9 +116,6 @@ export default function Events() {
                         <div className="font-bold drop-shadow-lg ">
                           {formatDateDDMMYYYY(ev.date)}
                         </div>
-                        <div className="text-[11px] text-[#2bd522] medieval-glow font-bold medievalsharp italic">
-                          {ev.time}
-                        </div>
                       </div>
                     </div>
 
