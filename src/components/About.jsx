@@ -28,10 +28,6 @@ export default function About() {
             </p>
 
 
-            {/* Aftermovie INSIDE this glass box */}
-            <div className="mx-auto max-w-4xl">
-              <Aftermovie />
-            </div>
           </div>
         </div>
 
