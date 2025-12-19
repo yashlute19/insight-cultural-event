@@ -64,7 +64,7 @@ export default function CulturalPointsTable() {
     <section id="points" className="py-16 sm:py-20 px-4 bg-transparent">
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="text-4xl sm:text-5xl md:text-6xl medievalsharp text-center mb-12 medieval-glow font-bold">
-          Cultural Points Table
+          Sports Points Table
         </h2>
 
         <div className="outer-glass relative mx-4 sm:mx-0">
