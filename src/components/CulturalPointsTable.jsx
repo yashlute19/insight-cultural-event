@@ -16,7 +16,16 @@ export default function CulturalPointsTable() {
   }, []);
 
   // create sorted copy
-  const sorted = [...departmentsData].sort((a, b) => b.totalPoints - a.totalPoints);
+  const sorted = [...departmentsData].sort((a, b) => {
+  // 1️ sort by points (DESC)
+  if (b.totalPoints !== a.totalPoints) {
+    return b.totalPoints - a.totalPoints;
+  }
+
+  // 2️ same points → manual priority (ASC)
+  return (a.priority ?? 0) - (b.priority ?? 0);
+});
+
 
   // non-destructive dedupe by id (keeps first occurrence)
   const deduped = (() => {

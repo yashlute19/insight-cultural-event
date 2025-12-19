@@ -20,7 +20,7 @@ export default function TeamSection() {
 
               {/* --- Conditional layout: grid for full rows, centered flex for small groups --- */}
               {isSmallGroup ? (
-                <div className="flex flex-col items-center sm:flex-row sm:flex-wrap sm:justify-center lg:flex-nowrap gap-8">
+                <div className="flex flex-col items-center sm:flex-row sm:flex-wrap sm:justify-center lg:flex-nowrap gap-28">
                   {members.map((member, index) => (
 
                     <div key={member.id} className="flex flex-col items-center w-[260px]">
@@ -30,7 +30,7 @@ export default function TeamSection() {
                             src={member.photo || "/placeholder.svg"}
                             alt={member.name}
                             loading={index < 4 ? "eager" : "lazy"}
-                            fetchpriority={index < 4 ? "high" : "auto"}
+                            fetchPriority={index < 4 ? "high" : "auto"}
                             decoding="async"
                             className="w-full h-full object-cover"
                           />
@@ -60,7 +60,7 @@ export default function TeamSection() {
                             src={member.photo || "/placeholder.svg"}
                             alt={member.name}
                             loading={index < 4 ? "eager" : "lazy"}
-                            fetchpriority={index < 4 ? "high" : "auto"}
+                            fetchPriority={index < 4 ? "high" : "auto"}
 
                             decoding="async"
                             className="w-full h-full object-cover"

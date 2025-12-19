@@ -1,77 +1,50 @@
 export const teamData = {
+   "FACULTY TEAM": [
+    {
+      id: 1,
+      name: "Dr. Ashish Dandekar",
+      role: "COORDINATOR",
+      photo: "/sir.webp",
+    },
+    {
+      id: 2,
+      name: "Shubhangi Chaware",
+      role: "Co-COORDINATOR",
+      photo: "/ma'am.webp",
+    },
+  ],
   "LEAD TEAM": [
     {
       id: 1,
-      name: "Ashley Joseph",
+      name: "Justine Augustine",
       role: "MENTOR",
-      photo: "#",
+      photo: "/justine.webp",
     },
     {
       id: 2,
       name: "Ansheel Salodkar",
       role: "COORDINATOR",
-      photo: "#",
+      photo: "/team2.webp",
     },
     {
       id: 3,
       name: "Peter Salve",
       role: "CO-COORDINATOR",
-      photo: "#",
+      photo: "/team3.webp",
     },
     {
       id: 4,
       name: "Simran Bobde",
       role: "CO-COORDINATOR",
-      photo: "#",
-    },
-  ],
-  "CULTURAL TEAM": [
-    {
-      id: 5,
-      name: "Sahil Korke",
-      role: "COORDINATOR",
-      photo: "#",
-    },
-    {
-      id: 6,
-      name: "Siddhesh Dhore",
-      role: "CO-COORDINATOR",
-      photo: "#",
-    },
-    {
-      id: 7,
-      name: "Bhoomi Khichhi",
-      role: "CO-COORDINATOR",
-      photo: "#",
-    },
-    {
-      id: 8,
-      name: "Valencio William",
-      role: "CO-COORDINATOR",
-      photo: "#",
-    },
-  ],
-  "SPORTS TEAM": [
-    {
-      id: 9,
-      name: "Parth Lonkar",
-      role: "COORDINATOR",
-      photo: "#",
-    },
-    {
-      id: 10,
-      name: "Parth Rebhe",
-      role: "CO-COORDINATOR",
-      photo: "#",
+      photo: "/team4.webp",
     },
   ],
   "IT & WEBSITE": [
     {
-      id: 9,
+      id: 1,
       name: "Yash Lute",
       role: "COORDINATOR",
-      photo: "#",
+      photo: "/yash.webp",
     },
-  ],
-
+  ]
 }
