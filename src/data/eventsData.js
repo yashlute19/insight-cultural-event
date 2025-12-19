@@ -121,7 +121,7 @@ export const events = [
   {
     id: 5,
     title: "NATSAMRAT",
-    date: "2025-12-21",
+    date: "2025-12-20",
     time: "21:30",
     poster: "/events/NATSAMRAT",
     images: [

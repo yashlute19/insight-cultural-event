@@ -34,7 +34,7 @@ innovative display of talent. INSIGHT  brings together students from all departm
     },
     {
       name: "Fr. Stanley Wilson",
-      designation: "",
+      designation: "Management Member",
       photo: "/Fr_STANLEY.webp",
     },
     {
@@ -44,7 +44,7 @@ innovative display of talent. INSIGHT  brings together students from all departm
     },
     {
       name: "Dr. Prashant Brajmohan Maheshwary",
-      designation: "",
+      designation: "Director QM & ID",
       photo: "/PRASHANT_MAHESHWARY.webp",
     },
   ],
