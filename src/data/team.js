@@ -44,7 +44,7 @@ export const teamData = {
       id: 1,
       name: "Yash Lute",
       role: "COORDINATOR",
-      photo: "/yash.webp",
+      photo: "/newyash.webp",
     },
   ]
 }
